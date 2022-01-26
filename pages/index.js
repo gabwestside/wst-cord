@@ -1,37 +1,8 @@
 import { Box, Button, Text, TextField, Image } from '@skynexui/components';
 import React from 'react';
+import { useRouter } from 'next/router';
 import appConfig from '../config.json';
 
-function GlobalStyle() {
-  return (
-    <style global jsx>{`
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        list-style: none;
-      }
-      body {
-        font-family: 'Open Sans', sans-serif;
-      }
-      /* App fit Height */
-      html,
-      body,
-      #__next {
-        min-height: 100vh;
-        display: flex;
-        flex: 1;
-      }
-      #__next {
-        flex: 1;
-      }
-      #__next > * {
-        flex: 1;
-      }
-      /* ./App fit Height */
-    `}</style>
-  );
-}
 
 function Titulo(props) {
   console.log(props);
@@ -61,14 +32,17 @@ function Titulo(props) {
 // }
 
 export default function PaginaInicial() {
-  // const username = 'gabwestside';
-
   const [username, setUsername] = React.useState('gabwestside');
+  const router = useRouter();
 
   return (
     <>
-      <GlobalStyle />
       <Box
+        onSubmit={function (infoEvent) {
+          infoEvent.preventDefault();
+          console.log('The button was clicked');
+          router.push('/chat');
+        }}
         styleSheet={{
           display: 'flex',
           alignItems: 'center',
@@ -123,21 +97,7 @@ export default function PaginaInicial() {
               {appConfig.name}
             </Text>
 
-            <input
-              type='text'
-              value={username}
-              onChange={function Handle(event) {
-                console.log('The user typed', event.target.value);
-
-                // Where's the value is it
-                const valor = event.target.value;
-
-                // Change the variable's value
-                setUsername(valor);
-              }}
-            />
-
-            {/* <TextField
+            <TextField
               fullWidth
               textFieldColors={{
                 neutral: {
@@ -147,7 +107,17 @@ export default function PaginaInicial() {
                   backgroundColor: appConfig.theme.colors.neutrals[800],
                 },
               }}
-            /> */}
+              value={username}
+              onChange={function Handler(event) {
+                console.log('The user typed', event.target.value);
+
+                // Where's the value is it
+                const valor = event.target.value;
+
+                // Change the variable's value, through the React, and alert who's need
+                setUsername(valor);
+              }}
+            />
             <Button
               type='submit'
               label='Entrar'
