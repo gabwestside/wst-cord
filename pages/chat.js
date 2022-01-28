@@ -2,8 +2,10 @@ import { Box, Text, TextField, Image, Button } from '@skynexui/components';
 import React, { useState } from 'react';
 import appConfig from '../config.json';
 
-export default function ChatPage() {
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTY0MzQwMjM1MCwiZXhwIjoxOTU4OTc4MzUwfQ.1pR4e0dvoZt9Js7IZLh1PovNU-maSVArT9vT3Tc8Ye0';
+const SUPABASE_URL = 'https://jlbqrqmgyeccjvjkvysd.supabase.co';
 
+export default function ChatPage() {
   const [mensagem, setMensagem] = useState('');
   const [messageList, setMessageList] = useState([]);
 
@@ -13,12 +15,9 @@ export default function ChatPage() {
       from: 'chrisalid',
       text: newMessage,
     };
-    setMessageList([
-        message,
-        ...messageList,
-    ]);
+    setMessageList([message, ...messageList]);
   }
-  
+
   return (
     <Box
       styleSheet={{
@@ -100,6 +99,16 @@ export default function ChatPage() {
                 marginRight: '12px',
                 color: appConfig.theme.colors.neutrals[200],
               }}
+            ></TextField>
+            <Button
+              variant='tertiary'
+              colorVariant='neutral'
+              label='Send'
+              href='/'
+              // onClick={(event) => {
+              //   const event = handleNewMessage(mensagem);
+              //   setMensagem('');
+              // }}
             />
           </Box>
         </Box>
@@ -149,55 +158,55 @@ function MessageList(props) {
     >
       {props.messages.map((mensagem) => {
         return (
-        <Text
-          key={mensagem.id}
-          tag='li'
-          styleSheet={{
-            borderRadius: '5px',
-            padding: '6px',
-            marginBottom: '12px',
-            hover: {
-              backgroundColor: appConfig.theme.colors.neutrals[700],
-            },
-          }}
-        >
-          <Box
+          <Text
+            key={mensagem.id}
+            tag='li'
             styleSheet={{
-              marginBottom: '8px',
+              borderRadius: '5px',
+              padding: '6px',
+              marginBottom: '12px',
+              hover: {
+                backgroundColor: appConfig.theme.colors.neutrals[700],
+              },
             }}
           >
-            <Image
+            <Box
               styleSheet={{
-                width: '20px',
-                height: '20px',
-                borderRadius: '50%',
-                display: 'inline-block',
-                marginRight: '8px',
-              }}
-              src={`https://github.com/chrisalid.png`}
-            />
-            <Text
-              tag='strong'
-              styleSheet={{
-                fontWeight: 'bold',
-                fontSize: '1.2rem',
+                marginBottom: '8px',
               }}
             >
-              {mensagem.from.capitalize()}
-            </Text>
-            <Text
-              styleSheet={{
-                fontSize: '10px',
-                marginLeft: '8px',
-                color: appConfig.theme.colors.neutrals[300],
-              }}
-              tag='span'
-            >
-              {new Date().toLocaleDateString()}
-            </Text>
-          </Box>
-          {mensagem.text}
-        </Text>
+              <Image
+                styleSheet={{
+                  width: '20px',
+                  height: '20px',
+                  borderRadius: '50%',
+                  display: 'inline-block',
+                  marginRight: '8px',
+                }}
+                src={`https://github.com/chrisalid.png`}
+              />
+              <Text
+                tag='strong'
+                // styleSheet={{
+                //   fontWeight: 'bold',
+                //   fontSize: '1.2rem',
+                // }}
+              >
+                {mensagem.from}
+              </Text>
+              <Text
+                styleSheet={{
+                  fontSize: '10px',
+                  marginLeft: '8px',
+                  color: appConfig.theme.colors.neutrals[300],
+                }}
+                tag='span'
+              >
+                {new Date().toLocaleDateString()}
+              </Text>
+            </Box>
+            {mensagem.text}
+          </Text>
         );
       })}
     </Box>
