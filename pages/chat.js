@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import appConfig from '../config.json';
 
 export default function ChatPage() {
-  // Sua lógica vai aqui
+
   const [mensagem, setMensagem] = useState('');
   const [messageList, setMessageList] = useState([]);
 
@@ -13,9 +13,12 @@ export default function ChatPage() {
       from: 'chrisalid',
       text: newMessage,
     };
-    setMessageList([...messageList, message]);
+    setMessageList([
+        message,
+        ...messageList,
+    ]);
   }
-  // ./Sua lógica vai aqui
+  
   return (
     <Box
       styleSheet={{
@@ -145,6 +148,7 @@ function MessageList(props) {
       }}
     >
       {props.messages.map((mensagem) => {
+        return (
         <Text
           key={mensagem.id}
           tag='li'
@@ -193,7 +197,8 @@ function MessageList(props) {
             </Text>
           </Box>
           {mensagem.text}
-        </Text>;
+        </Text>
+        );
       })}
     </Box>
   );
