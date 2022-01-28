@@ -58,6 +58,7 @@ export default function ChatPage() {
           }}
         >
           <MessageList messages={messageList} />
+
           {/* {messageList.map((mensagemAtual) => {
             return <li key={mensagemAtual.id}>
                 {mensagemAtual.from}: {mensagemAtual.text}
@@ -74,7 +75,6 @@ export default function ChatPage() {
             <TextField
               value={mensagem}
               onChange={(event) => {
-                // console.log('user are typing');
                 const value = event.target.value;
                 setMensagem(value);
               }}
@@ -130,7 +130,7 @@ function Header() {
 }
 
 function MessageList(props) {
-  console.log(props.messageList);
+  console.log(props);
 
   return (
     <Box
@@ -144,9 +144,9 @@ function MessageList(props) {
         marginBottom: '16px',
       }}
     >
-      {props.messages.map((message) => {
+      {props.messages.map((mensagem) => {
         <Text
-          key={message.id}
+          key={mensagem.id}
           tag='li'
           styleSheet={{
             borderRadius: '5px',
@@ -179,7 +179,7 @@ function MessageList(props) {
                 fontSize: '1.2rem',
               }}
             >
-              {message.from.capitalize}
+              {mensagem.from.capitalize()}
             </Text>
             <Text
               styleSheet={{
@@ -192,7 +192,7 @@ function MessageList(props) {
               {new Date().toLocaleDateString()}
             </Text>
           </Box>
-          {message.text}
+          {mensagem.text}
         </Text>;
       })}
     </Box>
