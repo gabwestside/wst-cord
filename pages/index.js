@@ -1,5 +1,5 @@
 import { Box, Button, Text, TextField, Image } from '@skynexui/components';
-import React from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import appConfig from '../config.json';
 
@@ -32,7 +32,7 @@ function Titulo(props) {
 // }
 
 export default function PaginaInicial() {
-  const [username, setUsername] = React.useState('gabwestside');
+  const [username, setUsername] = useState('gabwestside');
   const router = useRouter();
 
   return (

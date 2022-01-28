@@ -104,7 +104,6 @@ export default function ChatPage() {
               variant='tertiary'
               colorVariant='neutral'
               label='Send'
-              href='/'
               // onClick={(event) => {
               //   const event = handleNewMessage(mensagem);
               //   setMensagem('');
