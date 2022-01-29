@@ -6,13 +6,30 @@ import { createClient } from '@supabase/supabase-js';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTY0MzQ2OTY3OSwiZXhwIjoxOTU5MDQ1Njc5fQ.VVe8jYwYVPp9gjsyGk4sfvZIYvHuO-x3qadZV69muIw';
 const SUPABASE_URL = 'https://nixjopnfanoejkdifnfo.supabase.co';
 
-const supabaseClient = createClient(SUPABASE_ANON_KEY, SUPABASE_URL);
+const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-const supabaseData = supabaseClient
+fetch('$(SUPABASE_URL)/rest/v1/messages?select=>', {
+  header: {
+    'Content-Type': 'application/json',
+    'apikey': SUPABASE_ANON_KEY,
+    'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+  }
+})
+  .then((res) => {
+    return res.json();
+  })
+  .then((response) => {
+    console.log(response);
+  });
+
+supabaseClient
   .from('messages')
-  .select('*');
+  .select('*')
+  .then((supabaseData) => {
+    console.log('Dados do nosso banco de dados: ', supabaseData);
+  });
 
-console.log(supabaseData);
+
 
 export default function ChatPage() {
   const [mensagem, setMensagem] = useState('');
