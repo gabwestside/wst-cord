@@ -2,8 +2,8 @@ import { Box, Text, TextField, Image, Button } from '@skynexui/components';
 import React, { useState } from 'react';
 import appConfig from '../config.json';
 
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTY0MzQwMjM1MCwiZXhwIjoxOTU4OTc4MzUwfQ.1pR4e0dvoZt9Js7IZLh1PovNU-maSVArT9vT3Tc8Ye0';
-const SUPABASE_URL = 'https://jlbqrqmgyeccjvjkvysd.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTY0MzQ2OTY3OSwiZXhwIjoxOTU5MDQ1Njc5fQ.VVe8jYwYVPp9gjsyGk4sfvZIYvHuO-x3qadZV69muIw';
+const SUPABASE_URL = 'https://https://nixjopnfanoejkdifnfo.supabase.co';
 
 export default function ChatPage() {
   const [mensagem, setMensagem] = useState('');
