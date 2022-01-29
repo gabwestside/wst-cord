@@ -1,9 +1,18 @@
 import { Box, Text, TextField, Image, Button } from '@skynexui/components';
 import React, { useState } from 'react';
 import appConfig from '../config.json';
+import { createClient } from '@supabase/supabase-js';
 
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTY0MzQ2OTY3OSwiZXhwIjoxOTU5MDQ1Njc5fQ.VVe8jYwYVPp9gjsyGk4sfvZIYvHuO-x3qadZV69muIw';
-const SUPABASE_URL = 'https://https://nixjopnfanoejkdifnfo.supabase.co';
+const SUPABASE_URL = 'https://nixjopnfanoejkdifnfo.supabase.co';
+
+const supabaseClient = createClient(SUPABASE_ANON_KEY, SUPABASE_URL);
+
+const supabaseData = supabaseClient
+  .from('messages')
+  .select('*');
+
+console.log(supabaseData);
 
 export default function ChatPage() {
   const [mensagem, setMensagem] = useState('');
@@ -15,7 +24,10 @@ export default function ChatPage() {
       from: 'chrisalid',
       text: newMessage,
     };
-    setMessageList([message, ...messageList]);
+    setMessageList([
+      message,
+      ...messageList
+    ]);
   }
 
   return (
