@@ -28,7 +28,6 @@ const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 export default function ChatPage() {
   const [mensagem, setMensagem] = useState('');
   const [messageList, setMessageList] = useState([]);
-  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     supabaseClient
@@ -38,6 +37,7 @@ export default function ChatPage() {
       .then(({ data }) => {
         console.log('Dados do nosso banco de dados: ', data);
         setMessageList(data);
+        // setLoading(true);
       });
   }, []);
 
@@ -50,22 +50,15 @@ export default function ChatPage() {
 
     supabaseClient
       .from('messages')
-      .insert([
-        message
-      ])
+      .insert([message])
       .then(({ data }) => {
         console.log('Creating new messages: ', data);
-        
-        setMessageList([
-          data[0], 
-          ...messageList
-        ]);
-      })
+
+        setMessageList([data[0], ...messageList]);
+      });
   }
 
   return (
-    <>
-    {loading && <Loading />}
     <Box
       styleSheet={{
         display: 'flex',
@@ -165,7 +158,6 @@ export default function ChatPage() {
         </Box>
       </Box>
     </Box>
-    </>
   );
 }
 
@@ -194,73 +186,77 @@ function Header() {
 }
 
 function MessageList(props) {
-  console.log(props);
+  const [loading, setLoading] = useState(false);
+  // console.log(props);
 
   return (
-    <Box
-      tag='ul'
-      styleSheet={{
-        overflow: 'scroll',
-        display: 'flex',
-        flexDirection: 'column-reverse',
-        flex: 1,
-        color: appConfig.theme.colors.neutrals['000'],
-        marginBottom: '16px',
-      }}
-    >
-      {props.messages.map((mensagem) => {
-        return (
-          <Text
-            key={mensagem.id}
-            tag='li'
-            styleSheet={{
-              borderRadius: '5px',
-              padding: '6px',
-              marginBottom: '12px',
-              hover: {
-                backgroundColor: appConfig.theme.colors.neutrals[700],
-              },
-            }}
-          >
-            <Box
+    <>
+      {loading && <Loading />}
+      <Box
+        tag='ul'
+        styleSheet={{
+          overflow: 'scroll',
+          display: 'flex',
+          flexDirection: 'column-reverse',
+          flex: 1,
+          color: appConfig.theme.colors.neutrals['000'],
+          marginBottom: '16px',
+        }}
+      >
+        {props.messages.map((mensagem) => {
+          return (
+            <Text
+              key={mensagem.id}
+              tag='li'
               styleSheet={{
-                marginBottom: '8px',
+                borderRadius: '5px',
+                padding: '6px',
+                marginBottom: '12px',
+                hover: {
+                  backgroundColor: appConfig.theme.colors.neutrals[700],
+                },
               }}
             >
-              <Image
+              <Box
                 styleSheet={{
-                  width: '20px',
-                  height: '20px',
-                  borderRadius: '50%',
-                  display: 'inline-block',
-                  marginRight: '8px',
+                  marginBottom: '8px',
                 }}
-                src={`https://github.com/${mensagem.from}.png`}
-              />
-              <Text
-                tag='strong'
-                // styleSheet={{
-                //   fontWeight: 'bold',
-                //   fontSize: '1.2rem',
-                // }}
               >
-                {mensagem.from}
-              </Text>
-              <Text
-                styleSheet={{
-                  fontSize: '10px',
-                  marginLeft: '8px',
-                  color: appConfig.theme.colors.neutrals[300],
-                }}
-                tag='span'
-              >
-                {new Date().toLocaleDateString()}
-              </Text>
-            </Box>
-            {mensagem.text}
-          </Text>
-        );
-      })}
-    </Box>
+                <Image
+                  styleSheet={{
+                    width: '20px',
+                    height: '20px',
+                    borderRadius: '50%',
+                    display: 'inline-block',
+                    marginRight: '8px',
+                  }}
+                  src={`https://github.com/${mensagem.from}.png`}
+                />
+                <Text
+                  tag='strong'
+                  // styleSheet={{
+                  //   fontWeight: 'bold',
+                  //   fontSize: '1.2rem',
+                  // }}
+                >
+                  {mensagem.from}
+                </Text>
+                <Text
+                  styleSheet={{
+                    fontSize: '10px',
+                    marginLeft: '8px',
+                    color: appConfig.theme.colors.neutrals[300],
+                  }}
+                  tag='span'
+                >
+                  {new Date().toLocaleDateString()}
+                </Text>
+              </Box>
+              {mensagem.text}
+            </Text>
+          );
+        })}
+      </Box>
+    </>
   );
 }
