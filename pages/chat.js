@@ -1,39 +1,40 @@
 import { Box, Text, TextField, Image, Button } from '@skynexui/components';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import appConfig from '../config.json';
 import { createClient } from '@supabase/supabase-js';
 
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTY0MzQ2OTY3OSwiZXhwIjoxOTU5MDQ1Njc5fQ.VVe8jYwYVPp9gjsyGk4sfvZIYvHuO-x3qadZV69muIw';
+const SUPABASE_ANON_KEY =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTY0MzQ2OTY3OSwiZXhwIjoxOTU5MDQ1Njc5fQ.VVe8jYwYVPp9gjsyGk4sfvZIYvHuO-x3qadZV69muIw';
 const SUPABASE_URL = 'https://nixjopnfanoejkdifnfo.supabase.co';
 
 const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-fetch('$(SUPABASE_URL)/rest/v1/messages?select=>', {
-  header: {
-    'Content-Type': 'application/json',
-    'apikey': SUPABASE_ANON_KEY,
-    'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
-  }
-})
-  .then((res) => {
-    return res.json();
-  })
-  .then((response) => {
-    console.log(response);
-  });
-
-supabaseClient
-  .from('messages')
-  .select('*')
-  .then((supabaseData) => {
-    console.log('Dados do nosso banco de dados: ', supabaseData);
-  });
-
-
+// fetch('$(SUPABASE_URL)/rest/v1/messages?select=>', {
+//   header: {
+//     'Content-Type': 'application/json',
+//     'apikey': SUPABASE_ANON_KEY,
+//     'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+//   }
+// })
+//   .then((res) => {
+//     return res.json();
+//   })
+//   .then((response) => {
+//     console.log(response);
+//   });
 
 export default function ChatPage() {
   const [mensagem, setMensagem] = useState('');
   const [messageList, setMessageList] = useState([]);
+
+  useEffect(() => {
+    supabaseClient
+      .from('messages')
+      .select('*')
+      .then((supabaseData) => {
+        console.log('Dados do nosso banco de dados: ', supabaseData);
+      });
+  }, [messageList]);
 
   function handleNewMessage(newMessage) {
     const message = {
@@ -42,7 +43,7 @@ export default function ChatPage() {
       text: newMessage,
     };
     setMessageList([
-      message,
+      message, 
       ...messageList
     ]);
   }
@@ -133,6 +134,7 @@ export default function ChatPage() {
               variant='tertiary'
               colorVariant='neutral'
               label='Send'
+
               // onClick={(event) => {
               //   const event = handleNewMessage(mensagem);
               //   setMensagem('');
