@@ -2,6 +2,7 @@ import { Box, Text, TextField, Image, Button } from '@skynexui/components';
 import React, { useState, useEffect } from 'react';
 import appConfig from '../config.json';
 import { createClient } from '@supabase/supabase-js';
+import Loading from '../components/Loading';
 
 // Como fazer AJAX:
 const SUPABASE_ANON_KEY =
@@ -27,6 +28,7 @@ const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 export default function ChatPage() {
   const [mensagem, setMensagem] = useState('');
   const [messageList, setMessageList] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     supabaseClient
@@ -62,6 +64,8 @@ export default function ChatPage() {
   }
 
   return (
+    <>
+    {loading && <Loading />}
     <Box
       styleSheet={{
         display: 'flex',
@@ -161,6 +165,7 @@ export default function ChatPage() {
         </Box>
       </Box>
     </Box>
+    </>
   );
 }
 
