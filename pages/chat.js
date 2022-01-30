@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import appConfig from '../config.json';
 import { createClient } from '@supabase/supabase-js';
 
+// Como fazer AJAX:
 const SUPABASE_ANON_KEY =
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTY0MzQ2OTY3OSwiZXhwIjoxOTU5MDQ1Njc5fQ.VVe8jYwYVPp9gjsyGk4sfvZIYvHuO-x3qadZV69muIw';
 const SUPABASE_URL = 'https://nixjopnfanoejkdifnfo.supabase.co';
@@ -31,21 +32,33 @@ export default function ChatPage() {
     supabaseClient
       .from('messages')
       .select('*')
-      .then((supabaseData) => {
-        console.log('Dados do nosso banco de dados: ', supabaseData);
+      .order('id', { ascending: false })
+      .then(({ data }) => {
+        console.log('Dados do nosso banco de dados: ', data);
+        setMessageList(data);
       });
-  }, [messageList]);
+  }, []);
 
   function handleNewMessage(newMessage) {
     const message = {
-      id: messageList.length,
-      from: 'chrisalid',
+      // id: messageList.length,
+      from: 'gabwestside',
       text: newMessage,
     };
-    setMessageList([
-      message, 
-      ...messageList
-    ]);
+
+    supabaseClient
+      .from('messages')
+      .insert([
+        message
+      ])
+      .then(({ data }) => {
+        console.log('Creating new messages: ', data);
+        
+        setMessageList([
+          data[0], 
+          ...messageList
+        ]);
+      })
   }
 
   return (
@@ -59,6 +72,7 @@ export default function ChatPage() {
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
         backgroundBlendMode: 'multiply',
+        scrollbarWidth: 'none',
         color: appConfig.theme.colors.neutrals['000'],
       }}
     >
@@ -74,6 +88,7 @@ export default function ChatPage() {
           maxWidth: '95%',
           maxHeight: '95vh',
           padding: '32px',
+          scrollbarWidth: 'none',
         }}
       >
         <Header />
@@ -87,6 +102,7 @@ export default function ChatPage() {
             flexDirection: 'column',
             borderRadius: '5px',
             padding: '16px',
+            scrollbarWidth: 'none',
           }}
         >
           <MessageList messages={messageList} />
@@ -102,6 +118,7 @@ export default function ChatPage() {
             styleSheet={{
               display: 'flex',
               alignItems: 'center',
+              scrollbarWidth: 'none',
             }}
           >
             <TextField
@@ -213,7 +230,7 @@ function MessageList(props) {
                   display: 'inline-block',
                   marginRight: '8px',
                 }}
-                src={`https://github.com/chrisalid.png`}
+                src={`https://github.com/${mensagem.from}.png`}
               />
               <Text
                 tag='strong'
