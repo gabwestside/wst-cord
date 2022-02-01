@@ -36,7 +36,7 @@ export default function ChatPage() {
     {
       id: 1,
       from: 'gabwestside',
-      texto: ':sticker: IMAGE_URL'
+      texto: ':sticker: https://media1.giphy.com/media/BdghqxNFV4efm/200.gif'
     }
   ]);
 
@@ -246,10 +246,6 @@ function MessageList(props) {
                 />
                 <Text
                   tag='strong'
-                  // styleSheet={{
-                  //   fontWeight: 'bold',
-                  //   fontSize: '1.2rem',
-                  // }}
                 >
                   {mensagem.from}
                 </Text>
@@ -264,8 +260,13 @@ function MessageList(props) {
                   {new Date().toLocaleDateString()}
                 </Text>
               </Box>
-              {m}
-              {mensagem.text}
+              {mensagem.text.startsWith(':sticker:').toString()
+                ? ( 
+                  <image src={mensagem.text.replace(':sticker:', '')} />
+                 ) 
+                : ( 
+                  mensagem.text 
+                )}
             </Text>
           );
         })}
