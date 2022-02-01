@@ -1,8 +1,8 @@
 import React from 'react';
 import { Box, Button, Text, Image } from '@skynexui/components';
-import appConfig from '../../config.json';
+import appConfig from '../../../config.json';
 
-export function ButtonSendSticker(props) {
+export default function ButtonSendSticker(props) {
   const [isOpen, setOpenState] = React.useState('');
 
   return (

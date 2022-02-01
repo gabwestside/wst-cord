@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import appConfig from '../config.json';
 import { createClient } from '@supabase/supabase-js';
 import { useRouter } from 'next/router';
-
+import ButtonSendSticker from '../src/components/ButtonSendSticker';
 import Loading from '../src/components/Loading';
 import { Box, Text, TextField, Image, Button } from '@skynexui/components';
-import { route } from 'next/dist/server/router';
+
 
 // Como fazer AJAX:
 const SUPABASE_ANON_KEY =
@@ -32,7 +32,13 @@ export default function ChatPage() {
   const router = useRouter();
   const loggedUser = router.query.username;
   const [mensagem, setMensagem] = useState('');
-  const [messageList, setMessageList] = useState([]);
+  const [messageList, setMessageList] = useState([
+    {
+      id: 1,
+      from: 'gabwestside',
+      texto: ':sticker: IMAGE_URL'
+    }
+  ]);
 
   useEffect(() => {
     supabaseClient
@@ -41,7 +47,7 @@ export default function ChatPage() {
       .order('id', { ascending: false })
       .then(({ data }) => {
         console.log('Dados do nosso banco de dados: ', data);
-        setMessageList(data);
+        // setMessageList(data);
         // setLoading(true);
       });
   }, []);
@@ -59,7 +65,7 @@ export default function ChatPage() {
       .then(({ data }) => {
         console.log('Creating new messages: ', data);
 
-        setMessageList([data[0], ...messageList]);
+        //setMessageList([data[0], ...messageList]);
       });
   }
 
@@ -149,6 +155,7 @@ export default function ChatPage() {
                 color: appConfig.theme.colors.neutrals[200],
               }}
             ></TextField>
+            <ButtonSendSticker />
             <Button
               variant='tertiary'
               colorVariant='neutral'
