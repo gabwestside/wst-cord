@@ -1,8 +1,11 @@
-import { Box, Text, TextField, Image, Button } from '@skynexui/components';
 import React, { useState, useEffect } from 'react';
 import appConfig from '../config.json';
 import { createClient } from '@supabase/supabase-js';
-import Loading from '../components/Loading';
+import { useRouter } from 'next/router';
+
+import Loading from '../src/components/Loading';
+import { Box, Text, TextField, Image, Button } from '@skynexui/components';
+import { route } from 'next/dist/server/router';
 
 // Como fazer AJAX:
 const SUPABASE_ANON_KEY =
@@ -26,6 +29,8 @@ const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 //   });
 
 export default function ChatPage() {
+  const router = useRouter();
+  const loggedUser = router.query.username;
   const [mensagem, setMensagem] = useState('');
   const [messageList, setMessageList] = useState([]);
 
@@ -44,7 +49,7 @@ export default function ChatPage() {
   function handleNewMessage(newMessage) {
     const message = {
       // id: messageList.length,
-      from: 'gabwestside',
+      from: loggedUser,
       text: newMessage,
     };
 

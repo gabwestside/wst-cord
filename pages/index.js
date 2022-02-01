@@ -41,7 +41,7 @@ export default function PaginaInicial() {
         onSubmit={function (infoEvent) {
           infoEvent.preventDefault();
           console.log('The button was clicked');
-          router.push('/chat');
+          router.push(`/chat?username=${username}`);
         }}
         styleSheet={{
           display: 'flex',
