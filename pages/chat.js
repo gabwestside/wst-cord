@@ -245,10 +245,6 @@ function MessageList(props) {
                 />
                 <Text
                   tag='strong'
-                  // styleSheet={{
-                  //   fontWeight: 'bold',
-                  //   fontSize: '1.2rem',
-                  // }}
                 >
                   {mensagem.from}
                 </Text>
