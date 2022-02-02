@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import appConfig from '../../../config.json';
+import appConfig from '../config.json';
 import { createClient } from '@supabase/supabase-js';
 import { useRouter } from 'next/router';
-import ButtonSendSticker from '../../components/ButtonSendSticker';
-import Loading from '../../components/Loading';
+import ButtonSendSticker from '../src/components/ButtonSendSticker';
+import Loading from '../src/components/Loading';
 import { Box, Text, TextField, Image, Button } from '@skynexui/components';
 
 
@@ -260,6 +260,7 @@ function MessageList(props) {
                   {new Date().toLocaleDateString()}
                 </Text>
               </Box>
+<<<<<<< HEAD:src/pages/ChatPage/index.js
               {mensagem.text.startsWith(':sticker:').toString()
                 ? ( 
                   <image src={mensagem.text.replace(':sticker:', '')} />
@@ -267,6 +268,9 @@ function MessageList(props) {
                 : ( 
                   mensagem.text 
                 )}
+=======
+              {mensagem.text}
+>>>>>>> parent of 0843397 (Refactoring all folders structure):pages/chat.js
             </Text>
           );
         })}
