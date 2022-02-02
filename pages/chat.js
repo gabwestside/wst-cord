@@ -46,7 +46,7 @@ export default function ChatPage() {
       .order('id', { ascending: false })
       .then(({ data }) => {
         console.log('Dados do nosso banco de dados: ', data);
-        // setMessageList(data);
+        setMessageList(data);
         // setLoading(true);
       });
   }, []);
@@ -259,10 +259,12 @@ function MessageList(props) {
                   {new Date().toLocaleDateString()}
                 </Text>
               </Box>
-              {mensagem.text.startsWith(':sticker:') ? (
-                <image src={mensagem.text.replace(':sticker:', '')} />
-              ) : (
-                mensagem.text
+              {mensagem.texto.startsWith(':sticker:')
+              ? (
+                <Image src={mensagem.texto.replace(':sticker:', '')} />
+              )
+              : (
+                mensagem.texto
               )}
             </Text>
           );
