@@ -6,7 +6,6 @@ import ButtonSendSticker from '../src/components/ButtonSendSticker';
 import Loading from '../src/components/Loading';
 import { Box, Text, TextField, Image, Button } from '@skynexui/components';
 
-
 // Como fazer AJAX:
 const SUPABASE_ANON_KEY =
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTY0MzQ2OTY3OSwiZXhwIjoxOTU5MDQ1Njc5fQ.VVe8jYwYVPp9gjsyGk4sfvZIYvHuO-x3qadZV69muIw';
@@ -36,8 +35,8 @@ export default function ChatPage() {
     {
       id: 1,
       from: 'gabwestside',
-      texto: ':sticker: IMAGE_URL'
-    }
+      texto: ':sticker: https://media1.giphy.com/media/BdghqxNFV4efm/200.gif',
+    },
   ]);
 
   useEffect(() => {
@@ -264,7 +263,11 @@ function MessageList(props) {
                   {new Date().toLocaleDateString()}
                 </Text>
               </Box>
-              {mensagem.text}
+              {mensagem.text.startsWith(':sticker:') ? (
+                <image src={mensagem.text.replace(':sticker:', '')} />
+              ) : (
+                mensagem.text
+              )}
             </Text>
           );
         })}
