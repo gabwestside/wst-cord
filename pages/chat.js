@@ -45,9 +45,8 @@ export default function ChatPage() {
       .select('*')
       .order('id', { ascending: false })
       .then(({ data }) => {
-        console.log('Dados do nosso banco de dados: ', data);
+        // console.log('Dados do nosso banco de dados: ', data);
         setMessageList(data);
-        // setLoading(true);
       });
   }, []);
 
@@ -62,7 +61,7 @@ export default function ChatPage() {
       .from('messages')
       .insert([message])
       .then(({ data }) => {
-        console.log('Creating new messages: ', data);
+        // console.log('Creating new messages: ', data);
 
         //setMessageList([data[0], ...messageList]);
       });
