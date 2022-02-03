@@ -154,7 +154,12 @@ export default function ChatPage() {
                 color: appConfig.theme.colors.neutrals[200],
               }}
             ></TextField>
-            <ButtonSendSticker />
+            <ButtonSendSticker
+              onStickerClick={(sticker) => {
+                console.log('Salva esse sticker no banco', sticker);
+                handleNewMessage(`:sticker: ${sticker}`);
+              }}
+            />
             <Button
               variant='tertiary'
               colorVariant='neutral'
@@ -206,7 +211,7 @@ function MessageList(props) {
       <Box
         tag='ul'
         styleSheet={{
-          overflow: 'hidden',
+          overflow: 'scroll',
           display: 'flex',
           flexDirection: 'column-reverse',
           flex: 1,

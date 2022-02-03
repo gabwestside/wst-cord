@@ -10,6 +10,16 @@ function GlobalStyle() {
       body {
         font-family: 'Open Sans', sans-serif;
       }
+      ::-webkit-scrollbar {
+        backgroung: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        backgroung: lightgray;
+        border-radius: 10px;
+      }
+      ::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+      }
       /* App fit Height */
       html,
       body,
@@ -30,7 +40,7 @@ function GlobalStyle() {
 }
 
 export default function MyApp({ Component, pageProps }) {
-  console.log('Roda em todas as paginas!');
+  // console.log('Roda em todas as paginas!');
   return (
     <>
       <GlobalStyle />
