@@ -32,11 +32,11 @@ export default function ChatPage() {
   const loggedUser = router.query.username;
   const [mensagem, setMensagem] = useState('');
   const [messageList, setMessageList] = useState([
-    {
-      id: 1,
-      from: 'gabwestside',
-      texto: ':sticker: https://media1.giphy.com/media/BdghqxNFV4efm/200.gif',
-    },
+    // {
+    //   id: 1,
+    //   from: 'gabwestside',
+    //   texto: ':sticker: https://media1.giphy.com/media/BdghqxNFV4efm/200.gif',
+    // },
   ]);
 
   useEffect(() => {
@@ -206,7 +206,7 @@ function MessageList(props) {
       <Box
         tag='ul'
         styleSheet={{
-          overflow: 'scroll',
+          overflow: 'hidden',
           display: 'flex',
           flexDirection: 'column-reverse',
           flex: 1,
@@ -243,11 +243,7 @@ function MessageList(props) {
                   }}
                   src={`https://github.com/${mensagem.from}.png`}
                 />
-                <Text
-                  tag='strong'
-                >
-                  {mensagem.from}
-                </Text>
+                <Text tag='strong'>{mensagem.from}</Text>
                 <Text
                   styleSheet={{
                     fontSize: '10px',
@@ -259,12 +255,10 @@ function MessageList(props) {
                   {new Date().toLocaleDateString()}
                 </Text>
               </Box>
-              {mensagem.texto.startsWith(':sticker:')
-              ? (
-                <Image src={mensagem.texto.replace(':sticker:', '')} />
-              )
-              : (
-                mensagem.texto
+              {mensagem.text.startsWith(':sticker:') ? (
+                <Image src={mensagem.text.replace(':sticker:', '')} />
+              ) : (
+                mensagem.text
               )}
             </Text>
           );
