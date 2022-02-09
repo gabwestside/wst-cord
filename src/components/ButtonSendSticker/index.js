@@ -94,7 +94,11 @@ export default function ButtonSendSticker(props) {
                   },
                 }}
               >
-                <Image src={sticker} />
+                <Image src={sticker}
+                  styleSheet={{
+                    width: '20%'
+                  }}
+                />
               </Text>
             ))}
           </Box>
