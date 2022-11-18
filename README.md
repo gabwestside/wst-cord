@@ -3,6 +3,8 @@ A westside's chat very similar to the discord system,  with my own personalizati
 
 Para iniciá-lo, siga os passos abaixo:
 ```bash
+# Clonar o repositorio
+$ git clone https://github.com/rocketseat-education/nlw-06-reactjs
 # Instalar as dependências
 $ yarn
 # Iniciar o projeto
