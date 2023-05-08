@@ -202,7 +202,7 @@ function Header() {
 
 function MessageList(props) {
   const [loading, setLoading] = useState(false);
-  // console.log(props);
+  console.log(props);
 
   return (
     <>
@@ -218,7 +218,7 @@ function MessageList(props) {
           marginBottom: '16px',
         }}
       >
-        {props.messages.map((mensagem) => {
+        {/* {props.messages.map((mensagem) => {
           return (
             <Text
               key={mensagem.id}
@@ -266,7 +266,7 @@ function MessageList(props) {
               )}
             </Text>
           );
-        })}
+        })} */}
       </Box>
     </>
   );
