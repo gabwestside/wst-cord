@@ -4,9 +4,7 @@ import { useRouter } from 'next/router';
 import appConfig from '../config.json';
 
 
-function Titulo(props) {
-  console.log(props);
-
+function Title(props) {
   const Tag = props.tag || 'h1';
 
   return (
@@ -86,7 +84,7 @@ export default function PaginaInicial() {
               marginBottom: '32px',
             }}
           >
-            <Titulo tag='h2'>Boas vindas de volta!</Titulo>
+            <Title tag='h2'>Boas vindas de volta!</Title>
             <Text
               variant='body3'
               styleSheet={{

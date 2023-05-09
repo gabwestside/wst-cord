@@ -13,19 +13,19 @@ const SUPABASE_URL = 'https://nixjopnfanoejkdifnfo.supabase.co';
 
 const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-// fetch('$(SUPABASE_URL)/rest/v1/messages?select=>', {
-//   header: {
-//     'Content-Type': 'application/json',
-//     'apikey': SUPABASE_ANON_KEY,
-//     'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
-//   }
-// })
-//   .then((res) => {
-//     return res.json();
-//   })
-//   .then((response) => {
-//     console.log(response);
-//   });
+fetch('$(SUPABASE_URL)/rest/v1/messages?select=>', {
+  header: {
+    'Content-Type': 'application/json',
+    'apikey': SUPABASE_ANON_KEY,
+    'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+  }
+})
+  .then((res) => {
+    return res.json();
+  })
+  .then((response) => {
+    console.log(response);
+  });
 
 export default function ChatPage() {
   const router = useRouter();
@@ -45,7 +45,7 @@ export default function ChatPage() {
       .select('*')
       .order('id', { ascending: false })
       .then(({ data }) => {
-        // console.log('Dados do nosso banco de dados: ', data);
+        console.log('Dados do nosso banco de dados: ', data);
         setMessageList(data);
       });
   }, []);
@@ -61,9 +61,9 @@ export default function ChatPage() {
       .from('messages')
       .insert([message])
       .then(({ data }) => {
-        // console.log('Creating new messages: ', data);
+        console.log('Creating new messages: ', data);
 
-        //setMessageList([data[0], ...messageList]);
+        // setMessageList([data[0], ...messageList]);
       });
   }
 
@@ -78,7 +78,6 @@ export default function ChatPage() {
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
         backgroundBlendMode: 'multiply',
-        scrollbarWidth: 'none',
         color: appConfig.theme.colors.neutrals['000'],
       }}
     >
@@ -94,7 +93,6 @@ export default function ChatPage() {
           maxWidth: '95%',
           maxHeight: '95vh',
           padding: '32px',
-          scrollbarWidth: 'none',
         }}
       >
         <Header />
@@ -164,10 +162,10 @@ export default function ChatPage() {
               colorVariant='neutral'
               label='Send'
 
-              // onClick={(event) => {
-              //   const event = handleNewMessage(mensagem);
-              //   setMensagem('');
-              // }}
+            // onClick={(event) => {
+            //   const event = handleNewMessage(mensagem);
+            //   setMensagem('');
+            // }}
             />
           </Box>
         </Box>

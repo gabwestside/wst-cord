@@ -11,10 +11,10 @@ function GlobalStyle() {
         font-family: 'Open Sans', sans-serif;
       }
       ::-webkit-scrollbar {
-        backgroung: transparent;
+        background: transparent;
       }
       ::-webkit-scrollbar-thumb {
-        backgroung: lightgray;
+        background: lightgray;
         border-radius: 10px;
       }
       ::-webkit-scrollbar-thumb {
@@ -40,7 +40,6 @@ function GlobalStyle() {
 }
 
 export default function MyApp({ Component, pageProps }) {
-  // console.log('Roda em todas as paginas!');
   return (
     <>
       <GlobalStyle />
