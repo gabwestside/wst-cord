@@ -108,7 +108,7 @@ export default function ChatPage() {
             flexDirection: 'column',
             borderRadius: '5px',
             padding: '16px',
-            scrollbarWidth: 'none',
+            overflow: 'hidden',
           }}
         >
           <MessageList messages={messageList} />
@@ -216,6 +216,8 @@ function MessageList(props) {
           flex: 1,
           color: appConfig.theme.colors.neutrals['000'],
           marginBottom: '16px',
+          scrollbarWidth: 'none',
+          overflow: 'hidden'
         }}
       >
         {/* {props.messages.map((mensagem) => {
