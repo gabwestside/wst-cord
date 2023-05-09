@@ -13,30 +13,30 @@ const SUPABASE_URL = 'https://nixjopnfanoejkdifnfo.supabase.co';
 
 const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-fetch('$(SUPABASE_URL)/rest/v1/messages?select=>', {
-  header: {
-    'Content-Type': 'application/json',
-    'apikey': SUPABASE_ANON_KEY,
-    'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
-  }
-})
-  .then((res) => {
-    return res.json();
-  })
-  .then((response) => {
-    console.log(response);
-  });
+// fetch('$(SUPABASE_URL)/rest/v1/messages?select=>', {
+//   header: {
+//     'Content-Type': 'application/json',
+//     'apikey': SUPABASE_ANON_KEY,
+//     'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+//   }
+// })
+//   .then((res) => {
+//     return res.json();
+//   })
+//   .then((response) => {
+//     console.log(response);
+//   });
 
 export default function ChatPage() {
   const router = useRouter();
   const loggedUser = router.query.username;
   const [mensagem, setMensagem] = useState('');
   const [messageList, setMessageList] = useState([
-    // {
-    //   id: 1,
-    //   from: 'gabwestside',
-    //   texto: ':sticker: https://media1.giphy.com/media/BdghqxNFV4efm/200.gif',
-    // },
+    {
+      id: 1,
+      from: 'gabwestside',
+      texto: ':sticker: https://media1.giphy.com/media/BdghqxNFV4efm/200.gif',
+    },
   ]);
 
   useEffect(() => {
@@ -64,7 +64,13 @@ export default function ChatPage() {
         console.log('Creating new messages: ', data);
 
         // setMessageList([data[0], ...messageList]);
+        setMessageList([
+          data[0],
+          ...messageList,
+        ]);
       });
+
+    setMensagem('');
   }
 
   return (
